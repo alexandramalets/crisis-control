@@ -1,0 +1,16 @@
+# Версии — последние стабильные на январь 2026 (ЛЗ п. 3.2.4), см. scripts/check_versions.py
+fastapi==0.128.0
+uvicorn==0.40.0
+pydantic==2.12.5
+pydantic-settings==2.12.0
+email-validator==2.3.0
+sqlalchemy==2.0.46
+alembic==1.18.3
+psycopg[binary]==3.3.2
+pyjwt==2.11.0
+argon2-cffi==25.1.0
+httpx==0.28.1
+python-multipart==0.0.22
+openpyxl==3.1.5
+cryptography==46.0.4
+fpdf2==2.8.4

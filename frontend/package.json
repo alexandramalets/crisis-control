@@ -1,0 +1,26 @@
+{
+  "name": "crisis-analytics-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test src/lib/format.test.js src/lib/csv.test.js nginx/headers.test.js"
+  },
+  "dependencies": {
+    "axios": "1.13.4",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-router-dom": "7.13.0",
+    "recharts": "3.7.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "5.1.2",
+    "vite": "7.3.1"
+  }
+}

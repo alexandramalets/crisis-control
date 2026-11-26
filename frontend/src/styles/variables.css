@@ -1,0 +1,50 @@
+/* Светлая модульная палитра Crisis Control */
+:root {
+  --color-bg: #f8f9fa;
+  --color-surface: #ffffff;
+  --color-surface-raised: #f4f6f8;
+  --color-border: #e8edf2;
+  --color-text: #1b2430;
+  --color-text-muted: #7b8794;
+  --color-link: #1f8f55;
+  --color-accent: #1f8f55;
+  --color-accent-strong: #187a48;
+  --color-accent-soft: #e8f6ee;
+  --color-accent-hover: #dff3e8;
+  --color-positive: #1f8f55;
+  --color-warning: #e08a2c;
+  --color-negative: #d45446;
+  --color-overlay: rgba(20, 32, 48, 0.4);
+
+  --chrome-bg: #f8f9fa;
+  --chrome-bg-raised: #eef3f0;
+  --chrome-border: #e8edf2;
+  --chrome-text: #1b2430;
+  --chrome-muted: #7b8794;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+
+  --font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-size: 14px;
+  --line-height: 1.45;
+  --header-height: 60px;
+  --sidebar-width: 220px;
+
+  --shadow-card: 0 1px 2px rgba(27, 39, 51, 0.04);
+  --shadow-dialog: 0 8px 24px rgba(27, 39, 51, 0.12);
+
+  --control-height: 34px;
+  --control-height-sm: 28px;
+  --font-size-sm: 12px;
+  --font-size-md: 13px;
+  --font-size-lg: 15px;
+  --focus-ring: 0 0 0 3px rgba(31, 143, 85, 0.18);
+}

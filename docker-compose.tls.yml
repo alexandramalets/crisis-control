@@ -1,0 +1,50 @@
+# Стенд с TLS между узлами. Сертификаты заранее создаёт scripts/generate-dev-certs.ps1
+# (каталог deploy/certs в git не хранится).
+#
+#   powershell -ExecutionPolicy Bypass -File scripts\generate-dev-certs.ps1
+#   docker compose -f docker-compose.yml -f docker-compose.tls.yml up -d --build
+#
+# Браузер открывает https://localhost (порт 443). Сертификат клиента подписан учебным
+# центром сертификации: ca.crt нужно добавить в доверенные корневые, иначе браузер
+# покажет предупреждение. Локальный запуск без этого файла остаётся на HTTP.
+services:
+  database:
+    entrypoint: ["/bin/sh", "/tls-entrypoint.sh"]
+    command: ["postgres"]
+    environment:
+      POSTGRES_TLS_DIR: /var/lib/postgresql/tls-in
+    volumes:
+      - ./deploy/postgres-ssl-entrypoint.sh:/tls-entrypoint.sh:ro
+      - ./deploy/certs:/var/lib/postgresql/tls-in:ro
+
+  analytics-service:
+    environment:
+      REQUIRE_TLS: "true"
+      TLS_CERT_FILE: /certs/analytics.crt
+      TLS_KEY_FILE: /certs/analytics.key
+      TLS_CA_FILE: /certs/ca.crt
+    volumes:
+      - ./deploy/certs:/certs:ro
+
+  backend:
+    environment:
+      REQUIRE_TLS: "true"
+      DB_SSLMODE: verify-full
+      DB_SSLROOTCERT: /certs/ca.crt
+      ANALYTICS_SERVICE_URL: https://analytics-service:8001
+      ANALYTICS_TLS_CA_FILE: /certs/ca.crt
+      TLS_CERT_FILE: /certs/backend.crt
+      TLS_KEY_FILE: /certs/backend.key
+      TLS_CA_FILE: /certs/ca.crt
+      REFRESH_COOKIE_SECURE: "true"
+    volumes:
+      - ./deploy/certs:/certs:ro
+
+  frontend:
+    environment:
+      BACKEND_UPSTREAM: https://backend:8000
+    ports:
+      - "${FRONTEND_BIND_ADDRESS:-0.0.0.0}:443:443"
+    volumes:
+      - ./frontend/nginx/tls.conf.template:/etc/nginx/templates/default.conf.template:ro
+      - ./deploy/certs:/certs:ro

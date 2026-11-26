@@ -1,0 +1,7 @@
+# Дополнение: публикует порт PostgreSQL на хост, чтобы запускать серверное приложение
+# вне Docker (python -m app) или подключаться к БД с другого узла.
+#   docker compose -f docker-compose.yml -f docker-compose.db-port.yml up -d database
+services:
+  database:
+    ports:
+      - "${DB_BIND_ADDRESS:-127.0.0.1}:${DB_PUBLISHED_PORT:-5433}:5432"
